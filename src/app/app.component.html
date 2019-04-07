@@ -1,0 +1,28 @@
+<toaster-container [toasterconfig]="config"></toaster-container>
+<div style="text-align:center">
+  <h1>
+    Posts Blog
+  </h1>
+</div>
+
+<form>
+  <div class="form-group container">
+    <label for="exampleFormControlTextarea1">Add new post</label>
+    <textarea class="form-control" [(ngModel)]="text" id="exampleFormControlTextarea1" name="posts" rows="2"></textarea>
+    <button type="button" (click)="submitPost()" class="btn btn-primary">Add Post</button>
+  </div>
+
+  <div class="container">
+    <h4>All Posts</h4>
+    <div *ngFor="let loop of postsArray" class="card text-white bg-secondary mb-3" style="max-width: 58rem;">
+      <div class="card-body">
+        <p class="card-text">{{ loop?.post_content }}</p>
+      </div>
+      <button type="button" (click)="upvote(loop?._id)" class="btn btn-primary btn-sm">Upvote the post &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; count: &nbsp;{{loop?.upvote_count}}</button>
+    </div>
+
+  </div>
+
+</form>
+
+<router-outlet></router-outlet>
