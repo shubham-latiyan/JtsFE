@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }    from '@angular/forms';
-import { ToasterModule, ToasterService } from 'angular2-toaster';
+import { ToastNoAnimationModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
@@ -17,9 +17,11 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ToasterModule.forRoot()
+    ToastNoAnimationModule.forRoot({
+      maxOpened: 1
+    })
   ],
-  providers: [ToasterService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

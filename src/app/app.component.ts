@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { PostService } from './post.service';
-import { ToasterService } from "angular2-toaster/src/toaster.service";
-import { ToasterConfig } from 'angular2-toaster';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -13,14 +11,8 @@ export class AppComponent {
   text: String;
   postsArray: Array<any>;
 
-  constructor(private _ps: PostService, private ts: ToasterService) { }
-  public config: ToasterConfig =
-    new ToasterConfig({
-      showCloseButton: true,
-      tapToDismiss: true,
-      timeout: 500,
-      limit: 1
-    });
+  constructor(private _ps: PostService, private ts: ToastrService) { }
+
   ngOnInit() {
     this.getAllPost();
   }
@@ -29,18 +21,19 @@ export class AppComponent {
     this._ps.savePosts(this.text).subscribe((data: any) => {
       console.log('data:', data)
       if (data.isSuccess) {
-        this.ts.pop('success', '', 'New post added successfully');
+        this.ts.success('New post added successfully', '');
         this.text = "";
         this.postsArray.splice(0, 0, data.data)
       }
-      else{
-        this.ts.pop('error', '', data.msg);
+      else {
+        this.ts.error(data.msg, '');
       }
     })
   }
   getAllPost() {
     this._ps.getAllPosts().subscribe((data: any) => {
       this.postsArray = data.data;
+      console.log('this.postsArray:', this.postsArray)
     })
   }
   upvote(id) {

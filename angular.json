@@ -23,7 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/angular2-toaster/toaster.min.css",
+              
               "src/styles.css"
             ],
             "scripts": []
